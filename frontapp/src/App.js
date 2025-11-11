@@ -4,7 +4,7 @@ import Carrito from "./components/Carrito";
 import CatalogoLibros from "./components/CatalogoLibros";
 import ChatBot from "./components/ChatBot";
 import Envio from "./components/Envio";
-import Pedidos from "./components/Pedidos";
+import Pedidos from "./components/pedidos/Pedidos";
 import "./App.css";
 import ProcesoPedido from "./components/ProcesoPedido";
 

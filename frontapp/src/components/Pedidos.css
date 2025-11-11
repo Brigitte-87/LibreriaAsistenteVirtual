@@ -1,73 +1,85 @@
-.pedidos-container {
-  max-width: 950px;
-  margin: 40px auto;
-  padding: 30px;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-}
-
-.pedidos-container h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 1.8rem;
-  color: #333;
-}
-
-.cargando, .vacio {
-  text-align: center;
-  color: #666;
-  font-style: italic;
-}
-
-.tabla-pedidos {
-  width: 100%;
+.tabla-pedidos.mejorada {
   border-collapse: collapse;
-  margin-top: 20px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.tabla-pedidos th, .tabla-pedidos td {
-  border: 1px solid #e2e8f0;
-  padding: 10px 12px;
+.estado {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.estado.pendiente {
+  background: #ffe58f;
+  color: #8a6d3b;
+}
+
+.estado.preparando-pedido {
+  background: #91d5ff;
+  color: #003a8c;
+}
+
+.estado.en-ruta {
+  background: #b7eb8f;
+  color: #135200;
+}
+
+.estado.finalizado {
+  background: #ffd6e7;
+  color: #820014;
+}
+
+.btn-estado {
+  margin: 3px;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-estado.preparando { background: #1890ff; }
+.btn-estado.asignar { background: #13c2c2; }
+.btn-estado.finalizar { background: #52c41a; }
+.btn-ver { background: #722ed1; color: white; padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   text-align: center;
 }
 
-.tabla-pedidos th {
-  background-color: #007bff;
-  color: white;
-  font-weight: 600;
+.modal select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 5px;
 }
 
-.tabla-pedidos tr:nth-child(even) {
-  background-color: #f9fbff;
+.modal-botones button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.tabla-pedidos tr:hover {
-  background-color: #eaf3ff;
-  transition: 0.2s;
-}
-
-.analisis-container {
-  margin-top: 30px;
-  padding: 20px;
-  background: #f8faff;
-  border: 1.5px solid #dce4f9;
-  border-radius: 10px;
-}
-
-.analisis-container h3 {
-  color: #007bff;
-  margin-bottom: 10px;
-}
-
-.analisis-container p {
-  color: #333;
-  font-size: 15px;
-  margin-bottom: 6px;
-}
-
-.analisis-container .resumen {
-  font-style: italic;
-  color: #444;
-  margin-top: 10px;
-}
+.btn-confirmar { background: #13c2c2; color: white; }
+.btn-cerrar { background: #ff7875; color: white; }
