@@ -72,6 +72,7 @@ function Pedidos() {
             { key: 1, label: "Preparando" },
             { key: 2, label: "En Ruta" },
             { key: 3, label: "Finalizado" },
+            { key: 4, label: "Rechazado" },
           ].map((t) => (
             <button
               key={String(t.key)}
@@ -127,7 +128,7 @@ function Pedidos() {
                           <div
                             style={{
                               ...ui.progressFill,
-                              width: `${(Number(p.estado) / 3) * 100}%`,
+                              width: `${(Number(p.estado) / 4) * 100}%`,
                               ...progressColor(p.estado),
                             }}
                           />
@@ -136,14 +137,24 @@ function Pedidos() {
                       <td>{p.fecha}</td>
                       <td style={ui.actions}>
                         {Number(p.estado) === 0 && (
-                          <button
-                            title="Preparar"
-                            style={{ ...ui.iconBtn, ...ui.btnPrimary }}
-                            onClick={() => cambiarEstado(p.id_pedido, 1)}
-                          >
-                            ▶
-                          </button>
+                          <>
+                            <button
+                              title="Preparar"
+                              style={{ ...ui.iconBtn, ...ui.btnPrimary }}
+                              onClick={() => cambiarEstado(p.id_pedido, 1)}
+                            >
+                              ▶
+                            </button>
+                            <button
+                              title="Rechazar pedido"
+                              style={{ ...ui.iconBtn, ...ui.btnDanger }}
+                              onClick={() => cambiarEstado(p.id_pedido, 4)}
+                            >
+                              ✖
+                            </button>
+                          </>
                         )}
+
                         {Number(p.estado) === 1 && (
                           <button
                             title="Asignar ruta"
@@ -153,6 +164,7 @@ function Pedidos() {
                             ⇢
                           </button>
                         )}
+
                         {Number(p.estado) === 2 && (
                           <button
                             title="Finalizar"
@@ -162,13 +174,6 @@ function Pedidos() {
                             ✔
                           </button>
                         )}
-                        <button
-                          title="Ver detalle"
-                          style={{ ...ui.iconBtn, ...ui.btnDark }}
-                          onClick={() => navigate(`/proceso/${p.id_pedido}`)}
-                        >
-                          ⌕
-                        </button>
                       </td>
                     </tr>
                   ))}

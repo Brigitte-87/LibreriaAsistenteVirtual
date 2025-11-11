@@ -164,6 +164,7 @@ export const ui = {
   btnCyan: { background: "linear-gradient(135deg, #6AA5A9, #A3D2D5)" },
   btnSuccess: { background: "linear-gradient(135deg, #3F7856, #7EC384)" },
   btnDark: { background: "linear-gradient(135deg, #45625D, #3F7856)" },
+  btnDanger: { background: "linear-gradient(135deg, #d9534f, #b91c1c)" },
 
   overlay: {
     position: "fixed",
@@ -262,60 +263,44 @@ export const ui = {
 
 export function estadoColor(estado) {
   switch (Number(estado)) {
-    case 0:
-      return { background: "#A3D2D5", color: "#0b2230", border: "1px solid #85c4ca" };
-    case 1:
-      return { background: "#6AA5A9", color: "#ffffff", border: "1px solid #5a9296" };
-    case 2:
-      return { background: "#7EC384", color: "#0b2230", border: "1px solid #6db376" };
-    case 3:
-      return { background: "#3F7856", color: "#ffffff", border: "1px solid #3a6c4f" };
-    default:
-      return { background: "#e2e8f0", color: "#334155" };
+    case 0: return { background: "#A3D2D5", color: "#0b2230" };
+    case 1: return { background: "#6AA5A9", color: "#ffffff" };
+    case 2: return { background: "#7EC384", color: "#0b2230" };
+    case 3: return { background: "#3F7856", color: "#ffffff" };
+    case 4: return { background: "#d9534f", color: "#ffffff" };
+    default: return { background: "#e2e8f0", color: "#334155" };
   }
 }
 
 export function textoEstado(estado) {
   switch (Number(estado)) {
-    case 0:
-      return "En Proceso";
-    case 1:
-      return "Preparando Pedido";
-    case 2:
-      return "En Ruta";
-    case 3:
-      return "Finalizado";
-    default:
-      return "Desconocido";
+    case 0: return "En Proceso";
+    case 1: return "Preparando Pedido";
+    case 2: return "En Ruta";
+    case 3: return "Finalizado";
+    case 4: return "Rechazado";
+    default: return "Desconocido";
   }
 }
 
 export function iconoEstado(estado) {
   switch (Number(estado)) {
-    case 0:
-      return "⚙"; 
-    case 1:
-      return "⧉"; 
-    case 2:
-      return "➔"; 
-    case 3:
-      return "✔"; 
-    default:
-      return "?";
+    case 0: return "⚙";
+    case 1: return "⧉";
+    case 2: return "➔";
+    case 3: return "✔";
+    case 4: return "✖";
+    default: return "?";
   }
 }
 
 export function progressColor(estado) {
   switch (Number(estado)) {
-    case 0:
-      return { background: "linear-gradient(90deg, #A3D2D5, #6AA5A9)" };
-    case 1:
-      return { background: "linear-gradient(90deg, #6AA5A9, #7EC384)" };
-    case 2:
-      return { background: "linear-gradient(90deg, #7EC384, #3F7856)" };
-    case 3:
-      return { background: "linear-gradient(90deg, #3F7856, #3F7856)" };
-    default:
-      return { background: "linear-gradient(90deg, #e2e8f0, #cbd5e1)" };
+    case 0: return { background: "linear-gradient(90deg, #A3D2D5, #6AA5A9)" };
+    case 1: return { background: "linear-gradient(90deg, #6AA5A9, #7EC384)" };
+    case 2: return { background: "linear-gradient(90deg, #7EC384, #3F7856)" };
+    case 3: return { background: "linear-gradient(90deg, #3F7856, #3F7856)" };
+    case 4: return { background: "linear-gradient(90deg, #d9534f, #b91c1c)" };
+    default: return { background: "linear-gradient(90deg, #e2e8f0, #cbd5e1)" };
   }
 }
