@@ -1,0 +1,140 @@
+.analisis-dashboard-container {
+  font-family: "Poppins", sans-serif;
+  padding: 48px;
+  background: linear-gradient(145deg, #e6f2f1, #d2ebe8);
+  min-height: 100vh;
+  color: #0f172a;
+}
+
+.header-tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.header-tabs h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #073030;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.tab {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #6AA5A9, #A3D2D5);
+  color: #073030;
+}
+
+.tab:hover {
+  transform: scale(1.05);
+}
+
+.proceso-panel {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.proceso-panel h2 {
+  margin-bottom: 12px;
+  color: #073030;
+}
+
+.proceso-grid table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.conclusion {
+  background: linear-gradient(135deg, #A3D2D5, #6AA5A9);
+  color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.dashboard-panel h2 {
+  color: #073030;
+  margin-bottom: 20px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+.kpi-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+.kpi-card:hover {
+  transform: scale(1.05);
+}
+
+.kpi-card h4 {
+  color: #45625d;
+  font-weight: 600;
+}
+
+.kpi-card p {
+  font-size: 22px;
+  font-weight: 800;
+  color: #3F7856;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 28px;
+}
+
+.chart-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  text-align: center;
+}
+
+.chart-card h4 {
+  color: #073030;
+  margin-bottom: 12px;
+}
+
+.loading {
+  text-align: center;
+  padding: 80px;
+  font-size: 18px;
+  color: #073030;
+}
