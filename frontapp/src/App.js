@@ -8,6 +8,7 @@ import Pedidos from "./components/pedidos/Pedidos";
 import "./App.css";
 import ProcesoPedido from "./components/ProcesoPedido";
 import PedidosDashboard from "./pages/pedidos";
+import SeguimientoPedido from "./components/SeguimientoPedido";
 
 function App() {
   // 🛒 Carrito (vista cliente)
@@ -88,6 +89,7 @@ function App() {
           <Route path="/pedidos" element={<Pedidos />} />
           <Route path="/proceso/:id" element={<ProcesoPedido />} />
           <Route path="/dashboard" element={<PedidosDashboard />} />
+          <Route path="/seguimientopedido" element={<SeguimientoPedido />} />
 
         </Routes>
       </div>

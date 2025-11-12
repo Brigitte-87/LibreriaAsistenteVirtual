@@ -1,0 +1,205 @@
+.seguimiento-wrapper {
+  min-height: 100vh;
+  padding: 3rem 4rem;
+  background: linear-gradient(135deg, #a3d2d5, #6aa5a9, #3f7856);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #0f1e1e;
+  font-family: "Poppins", sans-serif;
+}
+
+.seguimiento-header {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.seguimiento-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.seguimiento-header p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+/* Buscador */
+.buscador-box {
+  background: #ffffffcc;
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  width: 420px;
+}
+
+.buscador-box input {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1rem;
+  font-size: 1.3rem;
+  border: 2px solid #6aa5a9;
+  border-radius: 10px;
+  outline: none;
+}
+
+.btn-confirmar {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #3f7856, #7ec384);
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-confirmar:hover {
+  transform: scale(1.05);
+}
+
+/* Resumen */
+.panel-info {
+  background: #ffffffee;
+  padding: 3rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  margin-bottom: 3rem;
+}
+
+.panel-info h2 {
+  font-size: 2rem;
+  color: #3f7856;
+  margin-bottom: 1rem;
+}
+
+.panel-info p {
+  font-size: 1.3rem;
+  margin: 0.4rem 0;
+}
+
+.estado {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+.estado-0 { background: #a3d2d5; color: #0b2230; }
+.estado-1 { background: #6aa5a9; }
+.estado-2 { background: #7ec384; color: #0b2230; }
+.estado-3 { background: #3f7856; }
+.estado-4 { background: #d9534f; }
+
+/* Rechazado */
+.panel-rechazado {
+  background: #ffeaea;
+  color: #b91c1c;
+  padding: 3rem;
+  border-radius: 20px;
+  width: 80%;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Progreso */
+.panel-progreso {
+  width: 95%;
+  max-width: 1300px;
+  background: #ffffffee;
+  border-radius: 20px;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.ruta-container {
+  position: relative;
+  width: 100%;
+  margin: 3rem 0;
+}
+
+.ruta-linea {
+  position: relative;
+  height: 200px;
+  border-top: 8px solid #cfd8d7;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 5rem;
+}
+
+.linea-progreso {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  height: 8px;
+  background: linear-gradient(90deg, #3f7856, #7ec384);
+  border-radius: 10px;
+  width: 0%;
+  box-shadow: 0 0 12px rgba(126,195,132,0.7);
+}
+
+.camion {
+  position: absolute;
+  top: -75px;
+  width: 100px;
+  height: 100px;
+}
+
+.camion img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.3));
+}
+
+/* Checkpoints */
+.checkpoint {
+  text-align: center;
+  color: #888;
+  transition: 0.4s;
+}
+
+.checkpoint img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 0.8rem;
+  opacity: 0.6;
+  transition: 0.4s ease;
+}
+
+.checkpoint.activo img {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 10px #7ec384);
+}
+
+.checkpoint.activo span {
+  color: #3f7856;
+  font-weight: 700;
+}
+
+.btn-volver {
+  border: none;
+  background: linear-gradient(135deg, #6aa5a9, #3f7856);
+  padding: 1rem 2.2rem;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-volver:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #7ec384, #3f7856);
+}
