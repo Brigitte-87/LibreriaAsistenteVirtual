@@ -77,6 +77,7 @@ function App() {
                 // ==================== VISTA DE ENVÍO ====================
                 <Envio
                   total={totalCarrito}
+                  librosCarrito={carrito} // 👈 se envían los libros del carrito
                   onVolver={() => setMostrarEnvio(false)}
                 />
               )

@@ -6,7 +6,7 @@ const cors = require('cors');
 const path = require('path');
 const dialogflow = require('@google-cloud/dialogflow');
 const { v4: uuid } = require('uuid');
-const conexion = require('./db');
+const conexion = require('./db'); // ✅ Ruta corregida
 
 // Inicializamos Express
 const app = express();
@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 // ================================
-// 🧩 RUTAS
+// 🧾 RUTAS DE LA API
 // ================================
 const pedidosRoutes = require('./routes/pedidos');
 app.use('/api/pedidos', pedidosRoutes);
@@ -41,7 +41,7 @@ app.post('/api/chat', async (req, res) => {
     });
 
     const sessionPath = sessionClient.projectAgentSessionPath(
-      "libreriaasistentevirtual-tx9n",
+      "libreriaasistentevirtual-tx9n", // 👈 tu ID de proyecto Dialogflow
       sessionId
     );
 
@@ -56,7 +56,8 @@ app.post('/api/chat', async (req, res) => {
     };
 
     const responses = await sessionClient.detectIntent(request);
-    const respuesta = responses[0].queryResult.fulfillmentText || "No tengo una respuesta para eso";
+    const respuesta =
+      responses[0].queryResult.fulfillmentText || "No tengo una respuesta para eso 😅";
 
     res.json({ respuesta });
   } catch (error) {

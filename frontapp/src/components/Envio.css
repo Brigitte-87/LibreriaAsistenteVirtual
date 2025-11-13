@@ -1,187 +1,221 @@
-/* === CONTENEDOR PRINCIPAL === */
-.envio-container {
-  max-width: 650px;
-  margin: 40px auto;
-  padding: 40px;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* === PALETA DE COLORES ===
+#7EC384 (Iguana Green)
+#3F7856 (Amazon)
+#45625D (Deep Space Sparkle)
+#6AA5A9 (Green Sheen)
+#A3D2D5 (Pale Robin Egg Blue)
+*/
+
+/* === FONDO GENERAL SOLO PARA ESTA VISTA === */
+.envio-page {
+  background: linear-gradient(135deg, #A3D2D5, #6AA5A9, #3F7856);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
-.envio-container:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+/* === CONTENEDOR PRINCIPAL === */
+.envio-page .envio-container {
+  width: 90%;
+  max-width: 850px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(14px);
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(69, 98, 93, 0.25);
+  padding: 40px 50px;
+  color: #18302B;
+  transition: 0.3s ease all;
+}
+
+.envio-page .envio-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(69, 98, 93, 0.35);
 }
 
 /* === TÍTULO === */
-.envio-container h2 {
+.envio-page .envio-container h2 {
   text-align: center;
-  font-size: 1.7rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #333;
+  color: #3F7856;
   margin-bottom: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
 }
 
 /* === FORMULARIO === */
-.envio-form label {
+.envio-page .envio-form label {
   display: block;
   font-weight: 600;
-  color: #333;
+  color: #24483E;
   margin-bottom: 8px;
 }
 
-.envio-form input,
-.envio-form select {
+.envio-page .envio-form input,
+.envio-page .envio-form select {
   width: 100%;
   padding: 12px 15px;
   margin-bottom: 20px;
-  border: 1.8px solid #ddd;
-  border-radius: 10px;
+  border: none;
+  border-radius: 12px;
   font-size: 15px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 2px 4px rgba(63, 120, 86, 0.15);
   transition: all 0.25s ease;
-  background-color: #fafafa;
 }
 
-.envio-form input:focus,
-.envio-form select:focus {
+.envio-page .envio-form input:focus,
+.envio-page .envio-form select:focus {
   outline: none;
-  border-color: #4a90e2;
-  background-color: #fff;
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(126, 195, 132, 0.25);
 }
 
 /* === MAPA === */
-.leaflet-container {
+.envio-page .leaflet-container {
   height: 420px !important;
   width: 100%;
-  border-radius: 15px;
+  border-radius: 20px;
   margin-top: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 18px rgba(63, 120, 86, 0.25);
 }
 
-/* === RESUMEN === */
-.resumen {
-  background-color: #f8faff;
-  padding: 20px;
-  border-radius: 15px;
-  border: 1.5px solid #e2e8f0;
+/* === TARJETA DE RESUMEN === */
+.envio-page .resumen {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1.5px solid rgba(163, 210, 213, 0.6);
+  border-radius: 20px;
+  padding: 25px;
   margin-top: 25px;
-  transition: 0.3s ease;
+  backdrop-filter: blur(8px);
+  color: #23483E;
 }
 
-.resumen:hover {
-  background-color: #f0f5ff;
-  border-color: #c7d9ff;
-}
-
-.resumen p {
+.envio-page .resumen p {
   margin: 6px 0;
   font-size: 15px;
-  color: #444;
 }
 
-.resumen .total {
-  margin-top: 12px;
-  font-size: 1.1rem;
-  color: #0078ff;
+.envio-page .resumen .total {
+  font-size: 1.2rem;
   font-weight: 700;
+  color: #3F7856;
+  margin-top: 10px;
 }
 
 /* === BOTONES === */
-.botones {
+.envio-page .botones {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.btn-volver,
-.btn-confirmar {
+.envio-page .btn-volver,
+.envio-page .btn-confirmar {
   padding: 12px 24px;
-  font-size: 15px;
-  border-radius: 10px;
-  cursor: pointer;
+  border-radius: 12px;
   font-weight: 600;
   border: none;
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition: 0.3s ease all;
 }
 
-.btn-volver {
-  background-color: #555;
+.envio-page .btn-volver {
+  background-color: rgba(69, 98, 93, 0.85);
   color: #fff;
 }
 
-.btn-volver:hover {
-  background-color: #333;
-  transform: translateY(-1px);
+.envio-page .btn-volver:hover {
+  background-color: #45625D;
+  transform: translateY(-2px);
 }
 
-.btn-confirmar {
-  background-color: #007bff;
-  color: white;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25);
+.envio-page .btn-confirmar {
+  background: linear-gradient(135deg, #7EC384, #3F7856);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(63, 120, 86, 0.35);
 }
 
-.btn-confirmar:hover {
-  background-color: #0066d6;
-  box-shadow: 0 6px 14px rgba(0, 123, 255, 0.35);
-  transform: translateY(-1px);
+.envio-page .btn-confirmar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(63, 120, 86, 0.45);
 }
 
-/* === ANIMACIONES DE TRANSPORTE === */
-.anim-moto {
-  animation: vibrar 0.6s infinite alternate;
-  display: inline-block;
-}
-
-.anim-truck {
-  animation: mover 1.4s infinite linear;
-  display: inline-block;
-}
-
-@keyframes vibrar {
-  from { transform: translateX(0px) rotate(-2deg); }
-  to { transform: translateX(2px) rotate(2deg); }
-}
-
-@keyframes mover {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(5px); }
-  100% { transform: translateX(0); }
-}
-
-/* === CUADRO DE CONFIRMACIÓN === */
-.confirmacion {
-  background: #f9fbff;
-  border: 1.5px solid #d6e0f5;
-  padding: 30px;
-  border-radius: 15px;
+/* === CONFIRMACIÓN / COMPROBANTE === */
+.envio-page .confirmacion {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1.5px solid rgba(163, 210, 213, 0.7);
+  border-radius: 25px;
+  padding: 35px;
   text-align: center;
+  box-shadow: 0 6px 25px rgba(69, 98, 93, 0.25);
   animation: aparecer 0.6s ease;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
-.confirmacion h3 {
-  color: #007bff;
-  font-weight: 700;
-  margin-bottom: 15px;
+.envio-page .confirmacion h3 {
+  color: #3F7856;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
-.confirmacion p {
+.envio-page .confirmacion p {
+  color: #23483E;
   font-size: 15px;
-  color: #333;
   margin: 8px 0;
 }
 
-.confirmacion .error {
-  color: red;
-  font-weight: bold;
+/* === TABLA DE DETALLES === */
+.envio-page .tabla-detalle {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
 }
 
+.envio-page .tabla-detalle th {
+  background: linear-gradient(135deg, #7EC384, #3F7856);
+  color: white;
+  padding: 10px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.envio-page .tabla-detalle td {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(163, 210, 213, 0.6);
+  color: #23483E;
+}
+
+.envio-page .tabla-detalle tr:hover td {
+  background: rgba(163, 210, 213, 0.4);
+}
+
+/* === BOTÓN FINAL === */
+.envio-page .btn-detalle {
+  background: linear-gradient(135deg, #7EC384, #3F7856);
+  color: #fff;
+  padding: 12px 28px;
+  margin-top: 25px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(63, 120, 86, 0.35);
+}
+
+.envio-page .btn-detalle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(63, 120, 86, 0.45);
+}
+
+/* === ANIMACIÓN GENERAL === */
 @keyframes aparecer {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -189,14 +223,17 @@
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
-  .envio-container {
-    margin: 20px;
+  .envio-page .envio-container {
     padding: 25px;
   }
 
-  .btn-volver,
-  .btn-confirmar {
+  .envio-page .tabla-detalle th,
+  .envio-page .tabla-detalle td {
+    font-size: 13px;
+  }
+
+  .envio-page .btn-volver,
+  .envio-page .btn-confirmar {
     width: 48%;
-    font-size: 14px;
   }
 }
