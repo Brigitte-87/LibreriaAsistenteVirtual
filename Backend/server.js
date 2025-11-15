@@ -1,16 +1,16 @@
-// ================================
-// 📦 LIBRERÍAS Y CONFIGURACIÓN BASE
-// ================================
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const dialogflow = require('@google-cloud/dialogflow');
-const { v4: uuid } = require('uuid');
-const conexion = require('./db');
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const dialogflow = require("@google-cloud/dialogflow");
+const { v4: uuid } = require("uuid");
+const conexion = require("./db");
 
-// Inicializamos Express
 const app = express();
 const PORT = 4000;
+
+
+const sucursalesRoutes = require("./routes/sucursales");
+
 
 // ================================
 // 🧩 MIDDLEWARES
@@ -19,25 +19,31 @@ app.use(cors());
 app.use(express.json());
 
 // ================================
-// 🧩 RUTAS
+// 🧩 RUTAS DEL API
 // ================================
-const pedidosRoutes = require('./routes/pedidos');
-app.use('/api/pedidos', pedidosRoutes);
 
-const mensajerosRoutes = require('./routes/mensajeros');
-app.use('/api/mensajeros', mensajerosRoutes);
+// Pedidos
+app.use("/api/pedidos", require("./routes/pedidos"));
 
+// Mensajeros
+app.use("/api/mensajeros", require("./routes/mensajeros"));
+
+// Login
+app.use("/api", require("./routes/authRoutes")); // => POST /api/login
+
+
+app.use("/api/sucursales", sucursalesRoutes);
 // ================================
-// 💬 CHAT CON DIALOGFLOW
+// 💬 RUTA CHAT CON DIALOGFLOW
 // ================================
-app.post('/api/chat', async (req, res) => {
+app.post("/api/chat", async (req, res) => {
   const { mensaje } = req.body;
   if (!mensaje) return res.status(400).json({ error: "Mensaje vacío" });
 
   try {
     const sessionId = uuid();
     const sessionClient = new dialogflow.SessionsClient({
-      keyFilename: path.join(__dirname, 'dialogflow-key.json'),
+      keyFilename: path.join(__dirname, "dialogflow-key.json"),
     });
 
     const sessionPath = sessionClient.projectAgentSessionPath(
@@ -50,13 +56,15 @@ app.post('/api/chat', async (req, res) => {
       queryInput: {
         text: {
           text: mensaje,
-          languageCode: 'es',
+          languageCode: "es",
         },
       },
     };
 
     const responses = await sessionClient.detectIntent(request);
-    const respuesta = responses[0].queryResult.fulfillmentText || "No tengo una respuesta para eso";
+    const respuesta =
+      responses[0].queryResult.fulfillmentText ||
+      "No tengo una respuesta para eso";
 
     res.json({ respuesta });
   } catch (error) {
@@ -69,6 +77,5 @@ app.post('/api/chat', async (req, res) => {
 // 🚀 INICIAR SERVIDOR
 // ================================
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
-  console.log("✅ Conexión exitosa con la base de datos MySQL");
+  console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
 });

@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Carrito from "./components/Carrito";
 import CatalogoLibros from "./components/CatalogoLibros";
 import ChatBot from "./components/ChatBot";
 import Envio from "./components/Envio";
 import Pedidos from "./components/pedidos/Pedidos";
-import "./App.css";
 import ProcesoPedido from "./components/ProcesoPedido";
-import PedidosDashboard from "./pages/pedidos";
+import PedidosAnalisisDashboard from "./pages/pedidos/PedidosDashboard";
+import PedidosHungaro from "./pages/pedidos/PedidosHungaro";
+import SeguimientoPedido from "./components/SeguimientoPedido";
+import Login from "./pages/Login";
+import ProtectedRoute from "./ProtectedRoute";
+
+import "./App.css";
 
 function App() {
-  // 🛒 Carrito (vista cliente)
   const [carrito, setCarrito] = useState([]);
-
-  // 🚚 Control de vista del formulario de envío
   const [mostrarEnvio, setMostrarEnvio] = useState(false);
 
-  // ➕ Agregar libro al carrito (sin duplicar)
   const agregarAlCarrito = (libro) => {
     setCarrito((prev) => {
       const existe = prev.find((item) => item.id === libro.id);
@@ -32,12 +34,10 @@ function App() {
     });
   };
 
-  // ❌ Eliminar libro del carrito
   const eliminarDelCarrito = (id) => {
     setCarrito((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // ✏️ Actualizar cantidad manualmente
   const actualizarCantidad = (id, nuevaCantidad) => {
     setCarrito((prev) =>
       prev.map((item) =>
@@ -48,7 +48,6 @@ function App() {
     );
   };
 
-  // 💰 Calcular total actual
   const totalCarrito = carrito.reduce(
     (acc, item) => acc + item.precio * item.cantidad,
     0
@@ -56,9 +55,9 @@ function App() {
 
   return (
     <Router>
-      <div style={{ fontFamily: "Arial", padding: "10px" }}>
+      <div style={{ fontFamily: "Arial" }}>
         <Routes>
-          {/* ==================== VISTA CLIENTE ==================== */}
+          
           <Route
             path="/"
             element={
@@ -75,19 +74,35 @@ function App() {
                   <ChatBot />
                 </>
               ) : (
-                // ==================== VISTA DE ENVÍO ====================
                 <Envio
                   total={totalCarrito}
+                  librosCarrito={carrito}
                   onVolver={() => setMostrarEnvio(false)}
                 />
               )
             }
           />
+          <Route path="/login" element={<Login />} />
+          <Route path="/seguimientopedido" element={<SeguimientoPedido />} />
+          <Route path="/pedidos"
+            element={
+              <ProtectedRoute>
+                <Pedidos />
+              </ProtectedRoute>
+            }
+          />
 
-          {/* ==================== VISTA DE PEDIDOS ==================== */}
-          <Route path="/pedidos" element={<Pedidos />} />
-          <Route path="/proceso/:id" element={<ProcesoPedido />} />
-          <Route path="/dashboard" element={<PedidosDashboard />} />
+          <Route
+            path="/proceso/:id"
+            element={
+              <ProtectedRoute>
+                <ProcesoPedido />
+              </ProtectedRoute>
+            }
+          />
+
+        <Route path="/pedidos/dashboard" element={<PedidosAnalisisDashboard />} />
+        <Route path="/pedidos/hungaro" element={<PedidosHungaro />} />
 
         </Routes>
       </div>

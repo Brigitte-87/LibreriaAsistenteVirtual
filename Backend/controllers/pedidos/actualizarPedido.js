@@ -1,54 +1,65 @@
-const conexion = require('../../db');
+const conexion = require("../../db");
+const generarRutasAlternativas = require("../rutas/generarRutasAlternativas");
 
-const actualizarPedido = (req, res) => {
+module.exports = async function actualizarPedido(req, res) {
   const { id } = req.params;
   const { estado, id_mensajero } = req.body;
 
-  if (estado === undefined || isNaN(estado)) {
-    return res.status(400).json({ mensaje: 'Estado inválido o faltante' });
-  }
+  const sql = `
+    UPDATE pedidos
+    SET estado = ?, id_mensajero = ?
+    WHERE id_pedido = ?
+  `;
 
-  let sql, params;
-
-  if (id_mensajero !== undefined && id_mensajero !== null) {
-    sql = `
-      UPDATE pedidos
-      SET estado = ?, id_mensajero = ?
-      WHERE id_pedido = ?
-    `;
-    params = [estado, id_mensajero, id];
-  } else {
-    sql = `
-      UPDATE pedidos
-      SET estado = ?
-      WHERE id_pedido = ?
-    `;
-    params = [estado, id];
-  }
-
-  conexion.query(sql, params, (error, resultado) => {
-    if (error) {
-      console.error('Error al actualizar el pedido:', error);
-      return res.status(500).json({ mensaje: 'Error en el servidor' });
+  conexion.query(sql, [estado, id_mensajero, id], async (err) => {
+    if (err) {
+      console.error("Error al actualizar pedido:", err);
+      return res.status(500).json({ mensaje: "Error interno" });
     }
 
-    if (resultado.affectedRows === 0) {
-      return res.status(404).json({ mensaje: 'Pedido no encontrado' });
+    console.log("Estado recibido:", estado);
+
+    if (Number(estado) === 2) {
+      console.log("→ Generando rutas para el pedido", id);
+
+      try {
+        const [rowsSucursal] = await conexion
+          .promise()
+          .query(`
+            SELECT s.lat AS lat, s.lng AS lng
+            FROM sucursales s
+            INNER JOIN pedidos p ON p.id_sucursal = s.id_sucursal
+            WHERE p.id_pedido = ?
+          `, [id]);
+
+        const [rowsPedido] = await conexion
+          .promise()
+          .query(`
+            SELECT lat AS lat, lng AS lng
+            FROM pedidos
+            WHERE id_pedido = ?
+          `, [id]);
+
+        if (!rowsSucursal.length || !rowsPedido.length) {
+          console.log("No se encontraron coordenadas válidas");
+          return res.json({ mensaje: "Pedido actualizado, sin rutas" });
+        }
+
+        const origen = rowsSucursal[0];
+        const destino = rowsPedido[0];
+
+        await generarRutasAlternativas(
+          id,
+          id_mensajero,
+          { lat: origen.lat, lng: origen.lng },
+          { lat: destino.lat, lng: destino.lng }
+        );
+
+      } catch (e) {
+        console.error("Error generando rutas:", e);
+      }
     }
 
-    console.log(
-      id_mensajero
-        ? `Pedido ${id} actualizado a estado ${estado} con mensajero ${id_mensajero}`
-        : `Pedido ${id} actualizado a estado ${estado}`
-    );
-
-    res.json({
-      mensaje: 'Pedido actualizado correctamente',
-      id,
-      estado,
-      id_mensajero: id_mensajero || null,
-    });
+    res.json({ mensaje: "Pedido actualizado" });
   });
 };
-
-module.exports = actualizarPedido;

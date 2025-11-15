@@ -2,40 +2,133 @@
 .catalogo-container {
   text-align: left;
   margin: 20px 0 60px;
-  padding-left: 20px; /* 🔹 Más pegado al borde izquierdo */
-  padding-right: 460px; /* 🔹 Más espacio para el carrito */
+  padding: 20px 460px 20px 20px; /* Espacio para carrito a la derecha */
+  background-color: #f5f8fa;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(106, 165, 169, 0.15);
+  max-width: 1400px;
+  transition: all 0.4s ease;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
-.catalogo-container h2 {
+/* === FILTRO DE CATEGORÍAS === */
+.filtro-categorias {
+  margin-bottom: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.filtro-categorias label {
+  font-weight: 600;
+  color: #2f4942;
+  font-size: 16px;
+}
+
+.filtro-categorias select {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 2px solid #6aa5a9;
+  background-color: #ffffff;
+  color: #3f7856;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filtro-categorias select:hover {
+  background-color: #a3d2d5;
+  transform: scale(1.05);
+}
+
+/* === BLOQUES DE CATEGORÍAS === */
+.bloque-categoria {
+  --cat-bg: #a3d2d51a;
+  --cat-head-from: #3f7856;
+  --cat-head-to: #7ec384;
+  --cat-accent: var(--cat-head-from);
+
+  margin: 50px 0;
+  padding: 25px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--cat-bg), #ffffff00);
+  box-shadow: 0 4px 10px rgba(106, 165, 169, 0.25);
+  animation: fadeIn 0.8s ease;
+  border-left: 6px solid var(--cat-accent);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === TÍTULO DE CATEGORÍA === */
+.bloque-categoria h2 {
   font-size: 26px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
   margin-bottom: 25px;
+  background: linear-gradient(90deg, var(--cat-head-from), var(--cat-head-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-align: center;
-  color: #222;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  animation: aparecer 0.6s ease;
+  position: relative;
+}
+
+.bloque-categoria h2::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cat-head-to), var(--cat-head-from));
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+/* === COLORES POR CATEGORÍA === */
+.cat-clasicos {
+  --cat-bg: #f9d5d533;
+  --cat-head-from: #e63946;
+  --cat-head-to: #b71c1c;
+  --cat-accent: #e63946;
+}
+
+.cat-infantil {
+  --cat-bg: #d1e3ff33;
+  --cat-head-from: #007bff;
+  --cat-head-to: #003f88;
+  --cat-accent: #007bff;
+}
+
+.cat-juvenil {
+  --cat-bg: #fff2cc33;
+  --cat-head-from: #ffd700;
+  --cat-head-to: #6a0dad;
+  --cat-accent: #ffd700;
 }
 
 /* === GRID DE LIBROS === */
 .catalogo-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  justify-items: start;
-  padding: 10px 10px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  justify-items: center;
+  padding: 10px;
 }
 
-/* === TARJETAS === */
+/* === TARJETAS DE LIBROS === */
 .libro-card {
-  background: white;
-  border-radius: 12px;
-  width: 180px;
-  padding: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  border-radius: 16px;
+  width: 200px;
+  padding: 15px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: fadeInUp 0.5s ease forwards;
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
   cursor: pointer;
 }
 
@@ -46,74 +139,87 @@
   }
 }
 
-/* 💫 Efecto al pasar el mouse */
 .libro-card:hover {
-  transform: scale(1.05) translateY(-5px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  transform: scale(1.07) translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
 .libro-card img {
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 10px;
+  transition: transform 0.4s ease;
+}
+
+.libro-card:hover img {
+  transform: scale(1.05);
 }
 
 .libro-card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  margin: 10px 0 5px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2b3b34;
+  margin: 10px 0 6px;
   text-align: center;
+  line-height: 1.3;
 }
 
 .libro-card p {
-  color: #555;
+  color: #45625d;
   margin: 0 0 10px;
   text-align: center;
+  font-weight: 500;
 }
 
 /* === BOTÓN AGREGAR === */
 .libro-card button {
-  background-color: #007bff;
+  background-color: var(--cat-accent);
   color: white;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 9px 16px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   display: block;
   margin: 0 auto;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
 .libro-card button:hover {
-  background-color: #0056b3;
+  background-color: var(--cat-head-to);
+  color: #fffbe7;
+  transform: translateY(-2px);
 }
 
 /* === BOTÓN “VER DETALLE DE PEDIDOS” === */
 .ver-pedidos-container {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 60px;
   animation: aparecer 0.8s ease;
 }
 
 .btn-pedidos {
-  padding: 12px 30px;
-  background-color: #007bff;
-  color: white;
-  font-weight: 600;
-  font-size: 15px;
+  padding: 14px 35px;
+  background-color: #3f7856;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(63, 120, 86, 0.4);
   transition: all 0.3s ease;
+  letter-spacing: 0.5px;
 }
 
 .btn-pedidos:hover {
-  background-color: #005ecb;
-  transform: translateY(-2px);
+  background-color: #7ec384;
+  color: #2b3b34;
+  transform: translateY(-3px);
 }
 
 @keyframes aparecer {
@@ -125,19 +231,49 @@
 @media (max-width: 900px) {
   .catalogo-grid {
     grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
   }
   .catalogo-container {
-    padding-right: 20px;
+    padding: 20px;
   }
 }
 
 @media (max-width: 600px) {
   .catalogo-grid {
     grid-template-columns: 1fr;
-    justify-items: center;
   }
   .libro-card {
-    width: 250px;
+    width: 240px;
   }
+  .bloque-categoria h2 {
+    font-size: 22px;
+  }
+  
 }
+
+/* === SCROLL CONTROLADO PARA TODO EL CATÁLOGO === */
+.catalogo-scroll-wrapper {
+  max-height: 75vh;        /* Altura visible */
+  overflow-y: auto;        /* Scroll vertical */
+  padding-right: 20px;     /* Espacio para que no tape contenido */
+  scroll-behavior: smooth; /* Scroll suave */
+}
+
+/* Scroll más elegante */
+.catalogo-scroll-wrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+.catalogo-scroll-wrapper::-webkit-scrollbar-track {
+  background: #e3efee;
+  border-radius: 10px;
+}
+
+.catalogo-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: #6aa5a9;
+  border-radius: 10px;
+}
+
+.catalogo-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #3f7856;
+}
+

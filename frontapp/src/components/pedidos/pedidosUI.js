@@ -1,13 +1,18 @@
 export const ui = {
   layout: {
     fontFamily: "Poppins, Inter, system-ui, sans-serif",
-    background:
-      "radial-gradient(1200px 800px at -10% -10%, rgba(163,210,213,0.6), transparent 60%), radial-gradient(900px 600px at 110% 10%, rgba(106,165,169,0.5), transparent 60%), linear-gradient(145deg, #A3D2D5 0%, #6AA5A9 45%, #3F7856 100%)",
-    minHeight: "100vh",
-    padding: "56px 64px",
-    color: "#0f172a",
+    background: `
+      radial-gradient(1200px 800px at -10% -10%, rgba(163,210,213,0.6), transparent 60%),
+      radial-gradient(900px 600px at 110% 10%, rgba(106,165,169,0.5), transparent 60%),
+      linear-gradient(145deg, #A3D2D5 0%, #6AA5A9 45%, #3F7856 100%)
+    `,
+    height: "100vh",
+    width: "100vw",
+    display: "flex",
+    flexDirection: "column",
+    padding: 0,         
+    overflow: "hidden",
     position: "relative",
-    overflowX: "hidden",
   },
 
   bgGlow: {
@@ -17,15 +22,14 @@ export const ui = {
       "radial-gradient(800px 400px at 20% 0%, rgba(255,255,255,0.25), transparent 50%)",
     pointerEvents: "none",
   },
-
+  
   header: {
-    background: "rgba(255, 255, 255, 0.16)",
+    background: "rgba(255, 255, 255, 0.18)",
     backdropFilter: "blur(14px)",
-    padding: "26px 32px",
-    borderRadius: 18,
-    marginBottom: 28,
-    boxShadow: "0 15px 50px rgba(0,0,0,0.12)",
-    border: "1px solid rgba(255,255,255,0.28)",
+    padding: "22px 32px",
+    borderRadius: 0,
+    boxShadow: "0 8px 30px rgba(0,0,0,0.18)",
+    borderBottom: "1px solid rgba(255,255,255,0.35)",
   },
 
   headerTop: {
@@ -36,74 +40,105 @@ export const ui = {
   },
 
   title: {
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: 800,
     margin: 0,
-    letterSpacing: "0.2px",
   },
 
   subtitle: {
-    fontSize: 14,
+    fontSize: 13,
     color: "#183b3b",
     marginTop: 8,
   },
 
-  searchWrap: { minWidth: 320, maxWidth: 520, width: "35%" },
+  searchWrap: {
+    minWidth: 280,
+    maxWidth: 500,
+    width: "40%",
+  },
 
   search: {
     width: "90%",
-    height: 40,
-    borderRadius: 12,
+    height: 38,
+    borderRadius: 10,
     padding: "0 14px",
     border: "1px solid rgba(255,255,255,0.45)",
+    background: "rgba(255,255,255,0.65)",
     outline: "none",
-    background: "rgba(255,255,255,0.6)",
-    backdropFilter: "blur(6px)",
     fontSize: 14,
   },
 
   kpis: {
     display: "grid",
-    gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-    gap: 12,
-    marginTop: 18,
+    gridTemplateColumns: "repeat(5, 1fr)",
+    gap: 10,
+    marginTop: 14,
   },
+
   kpi: {
     borderRadius: 14,
-    padding: "14px 16px",
+    padding: "10px 12px",
     background: "rgba(255,255,255,0.25)",
-    border: "1px solid rgba(255,255,255,0.35)",
+    border: "1px solid rgba(255,255,255,0.28)",
     boxShadow: "0 8px 22px rgba(0,0,0,0.08)",
   },
-  kpiLabel: { fontSize: 12, opacity: 0.7, marginBottom: 6 },
-  kpiValue: { fontSize: 22, fontWeight: 800 },
+
+  kpiLabel: { fontSize: 11, opacity: 0.7, marginBottom: 4 },
+  kpiValue: { fontSize: 20, fontWeight: 800 },
+
   kpiTotal: { background: "rgba(255,255,255,0.45)" },
   kpiE0: { background: "rgba(163,210,213,0.45)" },
   kpiE1: { background: "rgba(106,165,169,0.45)" },
   kpiE2: { background: "rgba(126,195,132,0.45)" },
   kpiE3: { background: "rgba(63,120,86,0.35)" },
 
-  tabs: { display: "flex", gap: 8, marginTop: 16, flexWrap: "wrap" },
+  tabs: {
+    display: "flex",
+    gap: 8,
+    flexWrap: "wrap",
+    marginTop: 14,
+  },
+
   tab: {
-    padding: "8px 12px",
-    borderRadius: 12,
+    padding: "6px 10px",
+    borderRadius: 10,
     background: "rgba(255,255,255,0.25)",
     border: "1px solid rgba(255,255,255,0.35)",
     cursor: "pointer",
     fontWeight: 600,
-    transition: "all 0.2s ease",
   },
+
   tabActive: {
     background: "linear-gradient(135deg, #6AA5A9, #A3D2D5)",
     color: "#073030",
   },
 
+  mainArea: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    overflow: "hidden",
+    minHeight: 0,
+  },
+
   card: {
-    background: "rgba(255, 255, 255, 0.2)",
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    background: "rgba(255,255,255,0.20)",
     backdropFilter: "blur(18px)",
-    borderRadius: 18,
-    boxShadow: "0 12px 50px rgba(0,0,0,0.12)",
     padding: "18px 24px",
+    borderRadius: "18px 18px 0 0",
+    overflow: "hidden",
+  },
+
+  tableWrapper: {
+    flex: 1,
+    overflowY: "auto",
+    minHeight: 0,
+    maxHeight: "100%",
+    scrollbarWidth: "thin",
+    scrollbarColor: "#A3D2D5 transparent",
   },
 
   table: {
@@ -111,45 +146,51 @@ export const ui = {
     borderCollapse: "separate",
     borderSpacing: "0 10px",
     fontSize: 14,
-    color: "#0f172a",
   },
+
   row: {
     background: "rgba(255,255,255,0.75)",
     boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
   },
+
   idCell: { fontWeight: 700 },
-  empty: { textAlign: "center", padding: 50, color: "#183b3b" },
+
+  empty: {
+    textAlign: "center",
+    padding: 50,
+    color: "#183b3b",
+  },
 
   status: {
     display: "inline-flex",
     alignItems: "center",
-    gap: 8,
-    minWidth: 160,
     justifyContent: "center",
-    borderRadius: 999,
-    padding: "8px 12px",
+    gap: 8,
+    padding: "6px 10px",
     fontWeight: 700,
-    letterSpacing: "0.3px",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
+    borderRadius: 999,
+    minWidth: 130,
   },
 
   progressTrack: {
-    width: 160,
+    width: 130,
     height: 10,
     borderRadius: 999,
     background: "rgba(0,0,0,0.08)",
     overflow: "hidden",
   },
+
   progressFill: {
     height: "100%",
     borderRadius: 999,
-    transition: "width 420ms ease",
+    transition: "width .4s ease",
   },
 
   actions: { display: "flex", gap: 8, justifyContent: "center" },
+
   iconBtn: {
-    width: 36,
-    height: 36,
+    width: 34,
+    height: 34,
     borderRadius: 10,
     border: "none",
     cursor: "pointer",
@@ -157,150 +198,174 @@ export const ui = {
     fontSize: 16,
     display: "grid",
     placeItems: "center",
-    boxShadow: "0 8px 18px rgba(0,0,0,0.18)",
-    transition: "transform .12s ease, box-shadow .2s ease",
   },
+
   btnPrimary: { background: "linear-gradient(135deg, #7EC384, #3F7856)" },
   btnCyan: { background: "linear-gradient(135deg, #6AA5A9, #A3D2D5)" },
   btnSuccess: { background: "linear-gradient(135deg, #3F7856, #7EC384)" },
-  btnDark: { background: "linear-gradient(135deg, #45625D, #3F7856)" },
   btnDanger: { background: "linear-gradient(135deg, #d9534f, #b91c1c)" },
+
+  pagination: {
+    paddingTop: 14,
+    display: "flex",
+    justifyContent: "center",
+    gap: 12,
+  },
+
+  pageBtn: {
+    padding: "6px 12px",
+    borderRadius: 10,
+    border: "none",
+    background: "linear-gradient(135deg, #6AA5A9, #A3D2D5)",
+    color: "#fff",
+    cursor: "pointer",
+    fontWeight: 600,
+  },
+
+  pageBtnDisabled: {
+    opacity: 0.4,
+    cursor: "not-allowed",
+  },
+
+  pageInfo: {
+    padding: "4px 10px",
+    background: "rgba(255,255,255,0.6)",
+    borderRadius: 8,
+    fontWeight: 600,
+    fontSize: 14,
+  },
 
   overlay: {
     position: "fixed",
     inset: 0,
     background: "rgba(0,0,0,0.45)",
-    backdropFilter: "blur(6px)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1000,
   },
+
   modal: {
-    background: "rgba(255,255,255,0.98)",
-    borderRadius: 18,
-    width: 460,
-    padding: 28,
-    boxShadow: "0 24px 60px rgba(0,0,0,0.35)",
+    width: 420,
+    background: "#fff",
+    borderRadius: 14,
+    padding: 26,
   },
+
   modalTitle: {
     fontSize: 20,
     fontWeight: 800,
-    color: "#1b3e3b",
-    marginBottom: 18,
+    marginBottom: 14,
   },
+
   select: {
     width: "100%",
-    height: 42,
+    height: 40,
     padding: "0 10px",
     borderRadius: 10,
     border: "1px solid #6AA5A9",
     marginBottom: 16,
-    fontSize: 14,
-    outline: "none",
-    background: "#fff",
-  },
-  modalActions: { display: "flex", justifyContent: "center", gap: 10 },
-
-  button: {
-    border: "none",
-    borderRadius: 12,
-    padding: "10px 16px",
-    color: "#fff",
-    fontWeight: 700,
-    cursor: "pointer",
-    transition: "all 0.3s ease",
-  },
-  cyan: {
-    background: "linear-gradient(135deg, #6AA5A9, #A3D2D5)",
-    boxShadow: "0 4px 12px rgba(106,165,169,0.4)",
-  },
-  danger: {
-    background: "linear-gradient(135deg, #d9534f, #b91c1c)",
-    color: "#fff",
   },
 
-  scrollContainer: {
-    maxHeight: "700px",
-    overflow: "hidden",
-  },
-  tableWrapper: {
-    overflowY: "auto",
-    maxHeight: "500px",
-    scrollbarWidth: "thin",
-    scrollbarColor: "#A3D2D5 transparent",
-  },
-  pagination: {
+  modalActions: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
-    gap: 12,
-    paddingTop: 18,
+    gap: 10,
   },
-  pageBtn: {
-    border: "none",
-    background: "linear-gradient(135deg, #6AA5A9, #A3D2D5)",
-    color: "#fff",
-    fontWeight: 600,
-    borderRadius: 10,
+
+  button: {
     padding: "8px 14px",
+    borderRadius: 10,
+    border: "none",
+    fontWeight: 700,
+    color: "#fff",
     cursor: "pointer",
-    transition: "opacity 0.2s ease, transform 0.1s ease",
   },
-  pageBtnDisabled: {
-    opacity: 0.4,
-    cursor: "not-allowed",
+
+  logoutBtn: {
+  background: "rgba(255,255,255,0.20)",
+  border: "1px solid rgba(255,255,255,0.45)",
+  padding: "8px 16px",
+  borderRadius: 12,
+  color: "#073030",
+  fontWeight: 700,
+  backdropFilter: "blur(6px)",
+  cursor: "pointer",
+  transition: "0.25s ease",
+  fontSize: 14,
+},
+
+
+  cyan: {
+    background: "linear-gradient(135deg, #6AA5A9, #A3D2D5)",
   },
-  pageInfo: {
-    fontSize: 14,
-    color: "#0f172a",
-    fontWeight: 600,
-    background: "rgba(255,255,255,0.6)",
-    borderRadius: 8,
-    padding: "6px 12px",
+
+  danger: {
+    background: "linear-gradient(135deg, #d9534f, #b91c1c)",
   },
 };
 
 export function estadoColor(estado) {
   switch (Number(estado)) {
-    case 0: return { background: "#A3D2D5", color: "#0b2230" };
-    case 1: return { background: "#6AA5A9", color: "#ffffff" };
-    case 2: return { background: "#7EC384", color: "#0b2230" };
-    case 3: return { background: "#3F7856", color: "#ffffff" };
-    case 4: return { background: "#d9534f", color: "#ffffff" };
-    default: return { background: "#e2e8f0", color: "#334155" };
+    case 0:
+      return { background: "#A3D2D5", color: "#0b2230" };
+    case 1:
+      return { background: "#6AA5A9", color: "#ffffff" };
+    case 2:
+      return { background: "#7EC384", color: "#0b2230" };
+    case 3:
+      return { background: "#3F7856", color: "#ffffff" };
+    case 4:
+      return { background: "#d9534f", color: "#ffffff" };
+    default:
+      return { background: "#e2e8f0", color: "#334155" };
   }
 }
 
 export function textoEstado(estado) {
   switch (Number(estado)) {
-    case 0: return "En Proceso";
-    case 1: return "Preparando Pedido";
-    case 2: return "En Ruta";
-    case 3: return "Finalizado";
-    case 4: return "Rechazado";
-    default: return "Desconocido";
+    case 0:
+      return "En Proceso";
+    case 1:
+      return "Preparando Pedido";
+    case 2:
+      return "En Ruta";
+    case 3:
+      return "Finalizado";
+    case 4:
+      return "Rechazado";
+    default:
+      return "Desconocido";
   }
 }
 
 export function iconoEstado(estado) {
   switch (Number(estado)) {
-    case 0: return "⚙";
-    case 1: return "⧉";
-    case 2: return "➔";
-    case 3: return "✔";
-    case 4: return "✖";
-    default: return "?";
+    case 0:
+      return "⚙";
+    case 1:
+      return "⧉";
+    case 2:
+      return "➔";
+    case 3:
+      return "✔";
+    case 4:
+      return "✖";
+    default:
+      return "?";
   }
 }
 
 export function progressColor(estado) {
   switch (Number(estado)) {
-    case 0: return { background: "linear-gradient(90deg, #A3D2D5, #6AA5A9)" };
-    case 1: return { background: "linear-gradient(90deg, #6AA5A9, #7EC384)" };
-    case 2: return { background: "linear-gradient(90deg, #7EC384, #3F7856)" };
-    case 3: return { background: "linear-gradient(90deg, #3F7856, #3F7856)" };
-    case 4: return { background: "linear-gradient(90deg, #d9534f, #b91c1c)" };
-    default: return { background: "linear-gradient(90deg, #e2e8f0, #cbd5e1)" };
+    case 0:
+      return { background: "linear-gradient(90deg, #A3D2D5, #6AA5A9)" };
+    case 1:
+      return { background: "linear-gradient(90deg, #6AA5A9, #7EC384)" };
+    case 2:
+      return { background: "linear-gradient(90deg, #7EC384, #3F7856)" };
+    case 3:
+      return { background: "linear-gradient(90deg, #3F7856, #3F7856)" };
+    default:
+      return { background: "#cbd5e1" };
   }
 }

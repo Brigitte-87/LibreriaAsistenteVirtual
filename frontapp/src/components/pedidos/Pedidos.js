@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePedidosLogic } from "./pedidosLogic";
-import { ui, estadoColor, textoEstado, iconoEstado, progressColor } from "./pedidosUI";
+import {
+  ui,
+  estadoColor,
+  textoEstado,
+  iconoEstado,
+  progressColor,
+} from "./pedidosUI";
+import ModalRutas from "../../components/ModalRutas";
 
 function Pedidos() {
   const navigate = useNavigate();
+
   const {
     pedidosFiltrados,
     loading,
@@ -21,9 +29,10 @@ function Pedidos() {
     cambiarEstado,
   } = usePedidosLogic();
 
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const pedidosPorPagina = 20;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [verRutas, setVerRutas] = useState(null);
 
+  const pedidosPorPagina = 20;
   const totalPages = Math.ceil(
     Math.min(pedidosFiltrados.length, 100) / pedidosPorPagina
   );
@@ -32,13 +41,22 @@ function Pedidos() {
     .slice(0, 100)
     .slice((currentPage - 1) * pedidosPorPagina, currentPage * pedidosPorPagina);
 
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/login", { replace: true });
+    window.location.reload();
+  };
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+
   return (
     <div style={ui.layout}>
       <div style={ui.bgGlow} />
-
       <header style={ui.header}>
         <div style={ui.headerTop}>
           <h1 style={ui.title}>Gestión de Pedidos</h1>
+
           <div style={ui.searchWrap}>
             <input
               placeholder="Buscar por ID, cliente, sucursal o mensajero..."
@@ -47,9 +65,27 @@ function Pedidos() {
               style={ui.search}
             />
           </div>
-        </div>
-        <p style={ui.subtitle}>Control total del flujo de entregas</p>
 
+            {user?.rol === "admin" && (
+              <button
+                style={{
+                  ...ui.logoutBtn,
+                  background: "rgba(255,255,255,0.32)",
+                  border: "1px solid rgba(255,255,255,0.55)",
+                  marginRight: 12,
+                }}
+                onClick={() => navigate("/pedidos/dashboard")}
+              >
+                Ver Dashboard
+              </button>
+            )}
+
+          <button style={ui.logoutBtn} onClick={logout}>
+            Cerrar sesión
+          </button>
+        </div>
+
+        <p style={ui.subtitle}>Control total del flujo de entregas</p>
         <div style={ui.kpis}>
           {[
             { label: "Total", value: kpis.total, style: ui.kpiTotal },
@@ -79,7 +115,9 @@ function Pedidos() {
               onClick={() => setFiltroEstado(t.key)}
               style={{
                 ...ui.tab,
-                ...(String(filtroEstado) === String(t.key) ? ui.tabActive : {}),
+                ...(String(filtroEstado) === String(t.key)
+                  ? ui.tabActive
+                  : {}),
               }}
             >
               {t.label}
@@ -87,12 +125,11 @@ function Pedidos() {
           ))}
         </div>
       </header>
-
-      <main style={{ ...ui.card, ...ui.scrollContainer }}>
+      <main style={ui.card}>
         {loading ? (
           <div style={ui.empty}>Cargando pedidos...</div>
-        ) : pedidosFiltrados.length === 0 ? (
-          <div style={ui.empty}>Sin resultados.</div>
+        ) : paginatedPedidos.length === 0 ? (
+          <div style={ui.empty}>No hay pedidos registrados.</div>
         ) : (
           <>
             <div style={ui.tableWrapper}>
@@ -110,6 +147,7 @@ function Pedidos() {
                     <th>Acción</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {paginatedPedidos.map((p) => (
                     <tr key={p.id_pedido} style={ui.row}>
@@ -118,11 +156,13 @@ function Pedidos() {
                       <td>{p.sucursal}</td>
                       <td>{p.mensajero || "—"}</td>
                       <td>Q{Number(p.total || 0).toFixed(2)}</td>
+
                       <td>
                         <span style={{ ...ui.status, ...estadoColor(p.estado) }}>
                           {iconoEstado(p.estado)} {textoEstado(p.estado)}
                         </span>
                       </td>
+
                       <td>
                         <div style={ui.progressTrack}>
                           <div
@@ -134,19 +174,19 @@ function Pedidos() {
                           />
                         </div>
                       </td>
+
                       <td>{p.fecha}</td>
+
                       <td style={ui.actions}>
                         {Number(p.estado) === 0 && (
                           <>
                             <button
-                              title="Preparar"
                               style={{ ...ui.iconBtn, ...ui.btnPrimary }}
                               onClick={() => cambiarEstado(p.id_pedido, 1)}
                             >
                               ▶
                             </button>
                             <button
-                              title="Rechazar pedido"
                               style={{ ...ui.iconBtn, ...ui.btnDanger }}
                               onClick={() => cambiarEstado(p.id_pedido, 4)}
                             >
@@ -157,7 +197,6 @@ function Pedidos() {
 
                         {Number(p.estado) === 1 && (
                           <button
-                            title="Asignar ruta"
                             style={{ ...ui.iconBtn, ...ui.btnCyan }}
                             onClick={() => setPedidoSeleccionado(p)}
                           >
@@ -166,14 +205,22 @@ function Pedidos() {
                         )}
 
                         {Number(p.estado) === 2 && (
-                          <button
-                            title="Finalizar"
-                            style={{ ...ui.iconBtn, ...ui.btnSuccess }}
-                            onClick={() => cambiarEstado(p.id_pedido, 3)}
-                          >
-                            ✔
-                          </button>
+                          <>
+                            <button
+                              style={{ ...ui.iconBtn, ...ui.btnSuccess }}
+                              onClick={() => cambiarEstado(p.id_pedido, 3)}
+                            >
+                              ✔
+                            </button>
+                            <button
+                              style={{ ...ui.iconBtn, background: "#3F7856" }}
+                              onClick={() => setVerRutas(p.id_pedido)}
+                            >
+                              📍
+                            </button>
+                          </>
                         )}
+
                       </td>
                     </tr>
                   ))}
@@ -211,12 +258,11 @@ function Pedidos() {
           </>
         )}
       </main>
-
       {pedidoSeleccionado && (
         <div style={ui.overlay}>
           <div style={ui.modal}>
             <h2 style={ui.modalTitle}>
-              Asignar mensajero — Pedido #{pedidoSeleccionado.id_pedido}
+              Asignar Mensajero — Pedido #{pedidoSeleccionado.id_pedido}
             </h2>
 
             <select
@@ -246,6 +292,7 @@ function Pedidos() {
               >
                 Confirmar
               </button>
+
               <button
                 style={{ ...ui.button, ...ui.danger }}
                 onClick={() => {
@@ -258,6 +305,9 @@ function Pedidos() {
             </div>
           </div>
         </div>
+      )}
+      {verRutas && (
+        <ModalRutas idPedido={verRutas} onClose={() => setVerRutas(null)} />
       )}
     </div>
   );

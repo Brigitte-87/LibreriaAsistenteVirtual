@@ -2,6 +2,17 @@ import React from "react";
 import "./Carrito.css";
 
 function Carrito({ items, onEliminar, onCantidadChange, onFinalizar }) {
+
+  // 🎨 Colores según categoría
+  const obtenerColorCategoria = (categoria) => {
+    const colores = {
+      "📖 Clásicos": "#e63946",
+      "👦 Literatura infantil": "#007bff",
+      "🧛‍♀️ Juvenil / Fantasía": "#ffd700",
+    };
+    return colores[categoria] || "#7EC384"; // color por defecto
+  };
+
   // Calcular total general
   const total = items.reduce(
     (sum, item) => sum + item.precio * (item.cantidad || 1),
@@ -29,10 +40,19 @@ function Carrito({ items, onEliminar, onCantidadChange, onFinalizar }) {
             {items.map((item) => (
               <tr key={item.id}>
                 <td className="libro-info">
-                  <img src={item.imagen} alt={item.titulo} />
+                  <img
+                    src={item.imagen}
+                    alt={item.titulo}
+                    style={{
+                      border: `3px solid ${obtenerColorCategoria(item.categoria)}`,
+                      borderRadius: "6px"
+                    }}
+                  />
                   <span>{item.titulo}</span>
                 </td>
+
                 <td>Q{item.precio}</td>
+
                 <td>
                   <input
                     type="number"
@@ -43,7 +63,9 @@ function Carrito({ items, onEliminar, onCantidadChange, onFinalizar }) {
                     }
                   />
                 </td>
+
                 <td>Q{item.precio * item.cantidad}</td>
+
                 <td>
                   <button
                     className="btn-eliminar"
@@ -60,7 +82,6 @@ function Carrito({ items, onEliminar, onCantidadChange, onFinalizar }) {
 
       <h4 className="carrito-total">Total: Q{total}</h4>
 
-      {/* ✅ Botón que abre la vista de Envío */}
       {items.length > 0 && (
         <button className="btn-finalizar" onClick={onFinalizar}>
           Finalizar pedido

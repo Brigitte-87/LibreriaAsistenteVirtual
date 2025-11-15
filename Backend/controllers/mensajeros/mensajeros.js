@@ -1,6 +1,6 @@
-import conexion from "../../db.js";
+const conexion = require("../../db");
 
-export const getMensajeros = (req, res) => {
+exports.getMensajeros = (req, res) => {
   const sql = `
     SELECT 
       id_mensajero,
